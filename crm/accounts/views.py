@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
+from .forms import OrderForm
 
 def home(request):
     orders = Order.objects.all()
@@ -33,5 +34,7 @@ def customer(request, pk):
 
 def createOrder(request):
 
-    context = {}
+    form = OrderForm()
+
+    context = {'form':form}
     return render(request, 'accounts/order_form.html', context)
