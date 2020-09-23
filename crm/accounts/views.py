@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 from .models import *
 from .forms import OrderForm
+from .filter import OrderFilter
 
 def home(request):
     orders = Order.objects.all()
@@ -30,7 +31,10 @@ def customer(request, pk):
     orders = customer.order_set.all()
     order_count = orders.count()
 
-    context = {'customer':customer, 'orders':orders, 'order_count':order_count,}
+    myFilter = OrderFilter(request.GET, queryset=orders)
+    orders = myFilter.qs
+
+    context = {'customer':customer, 'orders':orders, 'order_count':order_count,'myFilter': myFilter}
     print(order_count)
     return render(request,'accounts/customer.html',context)
 
@@ -57,7 +61,7 @@ def updateOrder(request, pk):
         if form.is_valid():
             form.save()
             return redirect('/')    
-    context = {'form':form}
+    context = {'formset':form}
     return render(request, 'accounts/order_form.html', context)
 
 def deleteOrder(request, pk):
