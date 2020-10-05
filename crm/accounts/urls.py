@@ -1,3 +1,4 @@
+from accounts.views import accountSettings
 from django.contrib import admin
 from django.urls import path
 from . import views
@@ -9,6 +10,9 @@ urlpatterns = [
     
     path('',views.home, name = "home"),
     path('user/', views.userPage ,name = "user-page"),
+
+    path('account/', views.accountSettings, name="account"),
+
     path('products/',views.products, name="products"),
     path('customer/<str:pk>',views.customer, name="customer"),
 
