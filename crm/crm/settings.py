@@ -19,12 +19,12 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DjangoKey')
+SECRET_KEY = '-q$!f)yjqb0mnnu+7qh_#j$sj5m1&&+9qt3kffe&b3%(1er^&p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['saipal-internship-django-crm.herokuapp.com','127.0.0.1', 'localhost:8000']
 
 
 # Application definition
@@ -78,12 +78,8 @@ WSGI_APPLICATION = 'crm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Demo_test',
-        'USER': 'postgres',
-        'PASSWORD': os.environ.get('DB'), 
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
     }
 }
 
